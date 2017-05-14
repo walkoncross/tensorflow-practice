@@ -37,7 +37,7 @@ sess.run(init)
 for step in range(201):
     sess.run(train)
     if step % 20 == 0:
-        print(step, sess.run(W), sess.run(b))
+        print("Iter {}: W={}, b={}, loss={}".format(step, sess.run(W), sess.run(b), sess.run(loss)))
 
 plt.figure()
 plt.plot(x_data, y_data, 'b.')

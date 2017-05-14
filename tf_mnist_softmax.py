@@ -3,6 +3,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
+batch_size = 100
+max_iters = 4000
+
 # setup computation graph
 x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]))
@@ -21,8 +24,8 @@ sess = tf.Session()
 sess.run(init)
 
 # start to train
-for i in range(4000):
-    batch_xs, batch_ys = mnist.train.next_batch(100)
+for i in range(max_iters):
+    batch_xs, batch_ys = mnist.train.next_batch(batch_size)
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
 
 # test accuracy of the training 

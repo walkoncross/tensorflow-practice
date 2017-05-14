@@ -16,6 +16,9 @@ sess = tf.InteractiveSession()
 x = tf.placeholder(tf.float32, [None, 784])
 y_ = tf.placeholder(tf.float32, [None, 10])
 
+batch_size = 50
+max_iters = 20000
+
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
@@ -74,8 +77,8 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess.run(tf.global_variables_initializer())
 
 # Train
-for i in range(20000):
-  batch = mnist.train.next_batch(50)
+for i in range(max_iters):
+  batch = mnist.train.next_batch(batch_size)
   if i%100 == 0:
     train_accuracy = accuracy.eval(feed_dict={
         x:batch[0], y_: batch[1], keep_prob: 1.0})
